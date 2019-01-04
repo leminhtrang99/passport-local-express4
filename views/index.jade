@@ -1,0 +1,60 @@
+
+extends layout
+
+block content
+  if (!user)
+    a(href="/login") Login
+    br
+    a(href="/register") Register
+  //- if (user)
+    p You are currently logged in as #{user.username}
+    p Countries you've been to
+      div 
+      h2 North America
+      br
+      form(action="/submit-country", method="post", style='max-width: 300px;')
+        p Country:
+        ul
+        each val in ["a", "b", "c"]
+          li= val
+        input.form-control(type='text', name="country-name", placeholder='Enter country name', autocomplete="off")
+        button.btn.btn-default(type='submit') Submit
+     
+      h2 South America
+      br
+      form(action="/submit-country", method="post", style='max-width: 300px;')
+        p Country:
+        input.form-control(type='text', name="country-name", placeholder='Enter country name',autocomplete="off")
+        button.btn.btn-default(type='submit') Submit
+      
+      h2 Europe
+      br
+      form(action="/submit-country", method="post", style='max-width: 300px;')
+        p Country:
+        input.form-control(type='text', name="country-name", placeholder='Enter country name',autocomplete="off")
+        button.btn.btn-default(type='submit') Submit
+      
+      h2 Africa
+      br
+      form(action="/submit-country", method="post", style='max-width: 300px;')
+        p Country:
+        input.form-control(type='text', name="country-name", placeholder='Enter country name',autocomplete="off")
+        button.btn.btn-default(type='submit') Submit
+      
+      h2 Asia
+      br
+      form(action="/submit-country" method="post", style='max-width: 300px;')
+        p Country:
+        input.form-control(type='text', name="country-name", placeholder='Enter country name',autocomplete="off")
+        button.btn.btn-default(type='submit') Submit
+      
+      h2 Oceania
+      br
+      form(action="/submit-country" method="post", style='max-width: 300px;')
+        p Country:
+        input.form-control(type='text', name="country-name", placeholder='Enter country name',autocomplete="off")
+        button.btn.btn-default(type='submit') Submit
+      
+      div
+    br
+    a(href="/logout") Logout
