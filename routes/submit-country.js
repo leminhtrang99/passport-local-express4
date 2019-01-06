@@ -1,5 +1,6 @@
 var express = require('express');
 var router = express.Router();
+var Country = require('../models/country');
 
 var africa = ['Algeria', 'Angola', 'Benin', 'Botswana', 'Burkina', 'Burundi', 'Cameroon', 
  'Cape Verde', 'Central African Republic', 'Chad', 'Comoros', 'Republic of the Congo', 
@@ -27,25 +28,24 @@ var northAmerica = ['Antigua and Barbuda', 'The Bahamas', 'Barbados', 'Belize', 
  'Trinidad and Tobago', 'United States'];
 var southAmerica=['Argentina', 'Bolivia', 'Brazil', 'Chile', 'Colombia', 'Ecuador', 'Guyana', 'Paraguay', 'Peru', 'Suriname', 'Uruguay', 'Venezuela'];
 
-
-
-router.get('/user/:username', function(req,res) {
-    if (req.user) {
-        req.params.username = req.user['username'];
-        console.log(req.user['username']);
-        res.render('user', { user : req.user, 
-            northAmericanCountries: northAmerica,
-            southAmericanCountries: southAmerica,
-            asianCountries: asia,
-            europeanCountries: europe,
-            oceanicCountries: oceania,
-            africanCountries: africa
-            });
-    }
-    else res.redirect('/');
-    
+router.get('/submit-country', function(req, res) {
+    res.render('user', { user : req.user, 
+        northAmericanCountries: northAmerica,
+        southAmericanCountries: southAmerica,
+        asianCountries: asia,
+        europeanCountries: europe,
+        oceanicCountries: oceania,
+        africanCountries: africa
+    });
 });
 
-
+router.post('/submit-country', function(req, res) {
+    var countries = req.body['countries'];
+    for (var i = 0; i < countries.length; i++){
+        Country.create([{name: countries[i]}], function(err) {
+        });
+    }
+  res.redirect('/');
+});
 
 module.exports = router;

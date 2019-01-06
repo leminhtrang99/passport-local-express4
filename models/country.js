@@ -4,7 +4,7 @@ var Schema = mongoose.Schema;
 var countrySchema = new Schema({
     owner: {type: Schema.Types.ObjectId, ref: 'Account'},
     name: String,
-    value: String
+    //value: boolean
     //date : Date
 })
 

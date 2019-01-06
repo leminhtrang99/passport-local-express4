@@ -6,7 +6,8 @@ var router = express.Router();
 
 
 router.get('/', function (req, res) {
-    res.render('index', { user : req.user });
+    if (req.user) res.redirect('/user');
+    else res.render('index', { user : req.user });
 });
 
 router.get('/register', function(req, res) {
@@ -30,7 +31,6 @@ router.post('/register', function(req, res, next) {
   });
 });
 
-
 router.get('/logout', function(req, res) {
     req.logout();
     res.redirect('/');
@@ -40,22 +40,5 @@ router.get('/ping', function(req, res){
     res.status(200).send("pong!");
 
 });
-
-
-//Submit country
-// router.get('/submit-country', function(req, res) {
-//     var test = ["a", "b", "c"];
-//     res.render('index', {test: test});
-    
-// });
-
-// router.post('/submit-country', function(req, res) {
-//     Country.create({ name : req.body['country-name']}, function(err) {
-//         if (err) console.log(err);
-//         console.log("success");
-//         res.redirect('/');
-//     });
-//     console.log(req.body['country-name']);
-// });
 
 module.exports = router;

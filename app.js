@@ -14,6 +14,7 @@ var index = require('./routes/index');
 var users = require('./routes/users');
 var user = require('./routes/user'); 
 var login = require('./routes/login');
+var submitCountry = require('./routes/submit-country');
 
 var app = express();
 
@@ -41,6 +42,7 @@ app.use('/', index);
 app.use('/', users);
 app.use('/', user);
 app.use('/', login);
+app.use('/', submitCountry);
 
 // passport config
 var Account = require('./models/account');
