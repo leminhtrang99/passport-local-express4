@@ -3,10 +3,17 @@ html
   head
     title= title
     meta(name='viewport', content='width=device-width, initial-scale=1.0')
-    link(href='http://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css', rel='stylesheet', media='screen')
+    link(href='http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css', rel='stylesheet', media='screen')
     link(rel='stylesheet', href='/stylesheets/style.css')
+    
   body
     block content
 
-  script(src='http://code.jquery.com/jquery.js')
-  script(src='http://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js')
+    script(src='http://code.jquery.com/jquery.js')
+    script(src='http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js')
+    script(src="https://www.amcharts.com/lib/4/core.js")
+    script(src="https://www.amcharts.com/lib/4/maps.js")
+    script(src="https://www.amcharts.com/lib/4/geodata/usaLow.js")
+    script(src="https://www.amcharts.com/lib/4/themes/animated.js")
+    script(src="https://www.amcharts.com/lib/4/geodata/worldLow.js")
+    script(src="/javascripts/map.js")

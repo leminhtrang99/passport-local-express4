@@ -32,7 +32,7 @@ var southAmerica=['Argentina', 'Bolivia', 'Brazil', 'Chile', 'Colombia', 'Ecuado
 router.get('/user/:username', function(req,res) {
     if (req.user) {
         req.params.username = req.user['username'];
-        console.log(req.user['username']);
+        //console.log(req.user['username']);
         res.render('user', { user : req.user, 
             northAmericanCountries: northAmerica,
             southAmericanCountries: southAmerica,

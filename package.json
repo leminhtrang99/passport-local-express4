@@ -13,7 +13,7 @@
   "license": "MIT",
   "dependencies": {
     "@amcharts/amcharts4": "^4.0.13",
-    "@amcharts/amcharts4-geodata": "^4.0.25",
+    "@amcharts/amcharts4-geodata": "^4.0.26",
     "body-parser": "^1.10.2",
     "chai": "~1.8.1",
     "connect-flash": "^0.1.1",

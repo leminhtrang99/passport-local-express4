@@ -21,9 +21,11 @@ var app = express();
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
+app.use(express.static(__dirname + '/public'));
 
 // uncomment after placing your favicon in /public
 //app.use(favicon(__dirname + '/public/favicon.ico'));
+
 app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -43,6 +45,8 @@ app.use('/', users);
 app.use('/', user);
 app.use('/', login);
 app.use('/', submitCountry);
+
+
 
 // passport config
 var Account = require('./models/account');
@@ -83,9 +87,6 @@ app.use(function(err, req, res, next) {
         error: {}
     });
 });
-
-//post country
-
 
 
 module.exports = app;
