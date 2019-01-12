@@ -7,30 +7,30 @@ block content
     p Countries you've been to
     
   
-    div(id='chartdiv')
+    div(id='mapdiv')
 
     div(class='container')
       ul(class="nav nav-tabs")
           li(class="active")
-            a(data-toggle='tab', href='#northAmerica') North America
+            a(data-toggle='tab', data-anchor="northAmerica", href='#northAmerica') North America
           li
-            a(data-toggle='tab', href='#southAmerica') South America
+            a(data-toggle='tab', data-anchor="southAmerica", href='#southAmerica') South America
           li
-            a(data-toggle='tab', href='#europe') Europe
+            a(data-toggle='tab', data-anchor="europe", href='#europe') Europe
           li
-            a(data-toggle='tab', href='#africa') Africa
+            a(data-toggle='tab', data-anchor="africa", href='#africa') Africa
           li
-            a(data-toggle='tab', href='#asia') Asia
+            a(data-toggle='tab', data-anchor="asia", href='#asia') Asia
           li
-            a(data-toggle='tab', href='#oceania') Oceania
+            a(data-toggle='tab', data-anchor="oceania", href='#oceania') Oceania
 
-      div(class='tab-content')
+      div(id="map-list" class='tab-content')
             div(id="northAmerica", class='tab-pane fade in active')
               form(role='form', action="/submit-country", method="post", style='max-width: 300px;')
                 .form-group
                   each country in northAmericanCountries
                       p
-                        input(type='checkbox', value= country, name="countries", id=country)
+                        input(type='checkbox', value= NACodes.get(country), name="countries", id=NACodes.get(country))
                         = country
                 button.btn.btn-default(type='submit') Submit
 
@@ -39,7 +39,7 @@ block content
                 .form-group(action="/submit-country", method="post", style='max-width: 300px;')
                   each country in southAmericanCountries
                       p
-                        input(type='checkbox', value= country, name="countries", id=country)
+                        input(type='checkbox', value= SACodes.get(country), name="countries", id=SACodes.get(country))
                         = country
                 button.btn.btn-default(type='submit') Submit
 
@@ -48,7 +48,7 @@ block content
                 .form-group
                   each country in europeanCountries
                       p
-                        input(type='checkbox', value= country, name="countries", id=country)
+                        input(type='checkbox', value= eurCodes.get(country), name="countries", id=eurCodes.get(country))
                         = country
                     br
                 button.btn.btn-default(type='submit') Submit
@@ -58,7 +58,7 @@ block content
                 .form-group
                   each country in africanCountries
                       p
-                        input(type='checkbox', value= country, name="countries", id=country)
+                        input(type='checkbox', value= afrCodes.get(country), name="countries", id=afrCodes.get(country))
                         = country
                 button.btn.btn-default(type='submit') Submit
 
@@ -68,7 +68,7 @@ block content
                 .form-group
                   each country in asianCountries
                       p
-                        input(type='checkbox', value= country, name="countries", id=country)
+                        input(type='checkbox', value= asCodes.get(country), name="countries", id=asCodes.get(country))
                         = country
                 button.btn.btn-default(type='submit') Submit
               
@@ -77,7 +77,7 @@ block content
                 .form-group
                   each country in oceanicCountries
                       p
-                        input(type='checkbox', value= country, name="countries", id=country)
+                        input(type='checkbox', value= oceCodes.get(country), name="countries", id=oceCodes.get(country))
                         = country
                 button.btn.btn-default(type='submit') Submit
 
