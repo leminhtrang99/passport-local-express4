@@ -1,31 +1,3 @@
-// var asiaDictionary = new Map();
-// var africaDictionary = new Map();
-// var oceaniaDictionary = new Map();
-// var northAmericaDictionary = new Map();
-// var southAmericaDictionary = new Map();
-// var europeDictionary = new Map();
-
-
-
-// for (var i = 0; i < asia.length; i++) {
-//   asiaDictionary.set(asia[i], asiaCodes[i]);
-// }
-// for (var i = 0; i < africa.length; i++) {
-//   africaDictionary.set(africa[i], africaCodes[i]);
-// }
-// for (var i = 0; i < oceania.length; i++) {
-//   oceaniaDictionary.set(oceania[i], oceaniaCodes[i]);
-// }
-// for (var i = 0; i < northAmerica.length; i++) {
-//   northAmericaDictionary.set(northAmerica[i], northAmericaCodes[i]);
-// }
-// for (var i = 0; i < southAmerica.length; i++) {
-//   southAmericaDictionary.set(southAmerica[i], southAmericaCodes[i]);
-// }
-// for (var i = 0; i < southAmerica.length; i++) {
-//   europeDictionary.set(europe[i], europeCodes[i]);
-// }
-
 var checkedCountries = [];
 
 
