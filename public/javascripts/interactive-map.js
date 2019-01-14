@@ -81,8 +81,6 @@ $("#map-list input:checkbox").click(function () {
 $('input[type=checkbox').each(buildVisitedCountryList);
   console.log(checkedCountries);
 
-
-
 function buildVisitedCountryList(countryCode) {
   if ($(this).is(':checked')) {
     checkedCountries.push(countryCode);

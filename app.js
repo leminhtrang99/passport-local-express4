@@ -15,7 +15,7 @@ var users = require('./routes/users');
 var user = require('./routes/user'); 
 var login = require('./routes/login');
 var submitCountry = require('./routes/submit-country');
-
+var register = require('./routes/register')
 var app = express();
 
 // view engine setup
@@ -45,7 +45,7 @@ app.use('/', users);
 app.use('/', user);
 app.use('/', login);
 app.use('/', submitCountry);
-
+app.use('/', register);
 
 
 // passport config
