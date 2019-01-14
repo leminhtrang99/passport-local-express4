@@ -10,7 +10,7 @@ router.get('/login', function(req, res) {
 router.post('/login', passport.authenticate('local'), function(req, res) {
     var username = req.user['username'];
     res.redirect(`/user/${username}`);
-    console.log("logged in successfully");
+    //console.log("logged in successfully");
  
 });
 

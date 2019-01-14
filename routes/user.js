@@ -92,9 +92,6 @@ router.get('/user/:username', function (req, res) {
     if (req.user) {
         //Display url based on username
         req.params.username = req.user['username'];
-        console.log("element with id US: " + req.body["US"]);
-        //console.log(req.user['username']);
-        //Fetch logged data from MongoDB
         MongoClient.connect(url,{ useNewUrlParser: true }, function (err, db,) {
             if (err) throw err;
             var dbo = db.db("passport_local_mongoose_express4");
@@ -107,7 +104,6 @@ router.get('/user/:username', function (req, res) {
                     visitedCountries.push(result[i].name);
                 }
                 //console.log(visitedCountries);
-
                 res.render('user', {
                     user: req.user,
                     northAmericanCountries: northAmerica,
