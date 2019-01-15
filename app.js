@@ -8,14 +8,15 @@ var bodyParser = require('body-parser');
 var mongoose = require('mongoose');
 var passport = require('passport');
 var LocalStrategy = require('passport-local').Strategy;
-
+const nodemailer = require("nodemailer");
 
 var index = require('./routes/index');
 var users = require('./routes/users');
 var user = require('./routes/user'); 
 var login = require('./routes/login');
 var submitCountry = require('./routes/submit-country');
-var register = require('./routes/register')
+var register = require('./routes/register');
+var emailVerification = require('./routes/email-verification')
 var app = express();
 
 // view engine setup
@@ -46,7 +47,7 @@ app.use('/', user);
 app.use('/', login);
 app.use('/', submitCountry);
 app.use('/', register);
-
+app.use('/', emailVerification);
 
 // passport config
 var Account = require('./models/account');
@@ -90,3 +91,5 @@ app.use(function(err, req, res, next) {
 
 
 module.exports = app;
+
+
