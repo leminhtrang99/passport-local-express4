@@ -43,22 +43,10 @@ router.post('/register', function (req, res) {
                 var token = req.user["token"];
                 var email = req.body["email"];
                 host = req.get('host');
-                // write Email
-                //console.log("Reach here at least one? From writeEmail ---------------------");
-                // var link = `http://${req.get('host')}/verify?id=${token}`;
-                // mailOptions = {
-                //     from: '"Fred Foo 👻" <f4qyvj4zqnykxug5@ethereal.email>', // sender address
-                //     to: email, // list of receivers
-                //     subject: "Hello ✔", // Subject line
-                //     text: "Hello world?", // plain text body
-                //     html: "Hello,<br> Please Click on the link to verify your email.<br><a href=" + link + ">Click here to verify</a>"
-                // }
-
+                //write email
                 mailOptions = writeEmail(email, host, token);
                 //send Email 
                 sendEmail(mailOptions);
-
-                
                 res.redirect('/');
             });
     });
