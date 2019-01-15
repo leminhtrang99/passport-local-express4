@@ -51,17 +51,17 @@ router.get('/send', function (req, res) {
     rand = Math.floor((Math.random() * 100 + 54));
     host = req.get('host');
     link = `http://${req.get('host')}/verify?id=${rand}`;
-    // setup email data with unicode symbols
-    // mailOptions = {
-    //     from: '"Fred Foo 👻" <f4qyvj4zqnykxug5@ethereal.email>', // sender address
-    //     to: req.query.email, // list of receivers
-    //     subject: "Hello ✔", // Subject line
-    //     text: "Hello world?", // plain text body
-    //     html: "Hello,<br> Please Click on the link to verify your email.<br><a href=" + link + ">Click here to verify</a>"
-    // };
+    //setup email data with unicode symbols
+    mailOptions = {
+        from: '"Fred Foo 👻" <f4qyvj4zqnykxug5@ethereal.email>', // sender address
+        to: req.query.email, // list of receivers
+        subject: "Hello ✔", // Subject line
+        text: "Hello world?", // plain text body
+        html: "Hello,<br> Please Click on the link to verify your email.<br><a href=" + link + ">Click here to verify</a>"
+    };
 
-    //console.log(mailOptions);
-    //console.log("host: ", req.get('host'));
+    console.log(mailOptions);
+    console.log("host: ", req.get('host'));
     smtpTransport.sendMail(mailOptions, function (err, response) {
         if (err) {
             console.log(err);

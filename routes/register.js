@@ -32,45 +32,33 @@ router.post('/register', function (req, res) {
         active: false,
         token: rand.toString()
     }), req.body.password, function (err, account) {
-            console.log("Called twice?");
+            //console.log("Called twice?");
             if (err) {
                 console.log(err);
                 return res.render('register', { account: account });
             }
             passport.authenticate('local')(req, res, function () {
-                console.log("---------- Called twice?");
-                console.log("This is user: ", req.user);
+                //console.log("---------- Called twice?");
+                //console.log("This is user: ", req.user);
                 var token = req.user["token"];
                 var email = req.body["email"];
                 host = req.get('host');
-
                 // write Email
-                console.log("Reach here at least one? From writeEmail ---------------------");
-                var link = `http://${req.get('host')}/verify?id=${token}`;
-                mailOptions = {
-                    from: '"Fred Foo 👻" <f4qyvj4zqnykxug5@ethereal.email>', // sender address
-                    to: email, // list of receivers
-                    subject: "Hello ✔", // Subject line
-                    text: "Hello world?", // plain text body
-                    html: "Hello,<br> Please Click on the link to verify your email.<br><a href=" + link + ">Click here to verify</a>"
-                }
+                //console.log("Reach here at least one? From writeEmail ---------------------");
+                // var link = `http://${req.get('host')}/verify?id=${token}`;
+                // mailOptions = {
+                //     from: '"Fred Foo 👻" <f4qyvj4zqnykxug5@ethereal.email>', // sender address
+                //     to: email, // list of receivers
+                //     subject: "Hello ✔", // Subject line
+                //     text: "Hello world?", // plain text body
+                //     html: "Hello,<br> Please Click on the link to verify your email.<br><a href=" + link + ">Click here to verify</a>"
+                // }
 
-                //mailOptions = writeEmail(email, token);
-                // sendEmail(mailOptions);
-
+                mailOptions = writeEmail(email, host, token);
                 //send Email 
-                
-                smtpTransport.sendMail(mailOptions, function (err, response) {
-                    if (err) {
-                        console.log(err);
-                        res.end("error");
-            
-                    } else {
-                        console.log(`Message sent: ${response.message}`);
-                        res.end("sent");
-                    }
-                });
+                sendEmail(mailOptions);
 
+                
                 res.redirect('/');
             });
     });
@@ -93,31 +81,31 @@ router.get('/verify', function (req, res) {
     }
 });
 
-// //Function that writes the email
-// function writeEmail(emailAddress, token) {
-//     console.log("Reach here at least one? From writeEmail ---------------------");
-//     var link = `http://${req.get('host')}/verify?id=${token}`;
-//     return mailOptions = {
-//         from: '"Fred Foo 👻" <f4qyvj4zqnykxug5@ethereal.email>', // sender address
-//         to: emailAddress, // list of receivers
-//         subject: "Hello ✔", // Subject line
-//         text: "Hello world?", // plain text body
-//         html: "Hello,<br> Please Click on the link to verify your email.<br><a href=" + link + ">Click here to verify</a>"
-//     }
-// }
+//Function that writes the email
+function writeEmail(emailAddress, host, token) {
+    console.log("Reach here at least one? From writeEmail ---------------------");
+    var link = `http://${host}/verify?id=${token}`;
+    return mailOptions = {
+        from: '"Fred Foo 👻" <f4qyvj4zqnykxug5@ethereal.email>', // sender address
+        to: emailAddress, // list of receivers
+        subject: "Hello ✔", // Subject line
+        text: "Hello world?", // plain text body
+        html: "Hello,<br> Please Click on the link to verify your email.<br><a href=" + link + ">Click here to verify</a>"
+    }
+}
 
-// //Function that sends the email
-// function sendEmail(email) {
-//     smtpTransport.sendMail(email, function (err, response) {
-//         if (err) {
-//             console.log(err);
-//             res.end("error");
+//Function that sends the email
+function sendEmail(email) {
+    smtpTransport.sendMail(email, function (err, response) {
+        if (err) {
+            console.log(err);
+            res.end("error");
 
-//         } else {
-//             console.log(`Message sent: ${response.message}`);
-//             res.end("sent");
-//         }
-//     });
-// }
+        } else {
+            console.log(`Message sent: ${response.message}`);
+            res.end("sent");
+        }
+    });
+}
 
 module.exports = router;
