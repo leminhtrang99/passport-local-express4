@@ -12,6 +12,8 @@ var accountSchema = new Schema({
     _id: {
         type: Schema.Types.ObjectId
     },
+    active: false,
+    token: String,
     countries: [{
         type: Schema.Types.ObjectId, 
         ref: 'Country'
