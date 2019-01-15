@@ -9,9 +9,13 @@ router.get('/register', function(req, res) {
 });
 
 router.post('/register', function(req, res) {
+    rand = Math.floor((Math.random() * 100 + 54));
     Account.register(new Account({ 
         _id: new mongoose.Types.ObjectId(),
-        username : req.body.username
+        email: req.body.email,
+        username : req.body.username,
+        active: false,
+        token: rand.toString()
     }), 
     req.body.password, 
     function(err, account) {
@@ -20,7 +24,9 @@ router.post('/register', function(req, res) {
             return res.render('register', { account : account });
         }
         passport.authenticate('local')(req, res, function () {
-            res.redirect('/');
+            var token = encodeURIComponent(req.user["token"]);
+            var email = encodeURIComponent(req.body["email"]);
+            res.redirect(`/send?email=${email}`);
         });
     });
 });
