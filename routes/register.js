@@ -5,6 +5,7 @@ var router = express.Router();
 var mongoose = require('mongoose');
 const nodemailer = require('nodemailer');
 
+
 var rand, mailOptions, host;
 
 
@@ -24,15 +25,16 @@ router.get('/register', function (req, res) {
 });
 
 router.post('/register', function (req, res) {
-    rand = Math.floor((Math.random() * 100 + 54));
+    //rand = Math.floor((Math.random() * 100 + 54));
+    
     Account.register(new Account({
         _id: new mongoose.Types.ObjectId(),
         email: req.body.email,
         username: req.body.username,
         active: false,
-        token: rand.toString()
+        token: Account.generateJWT(),
     }), req.body.password, function (err, account) {
-            //console.log("Called twice?");
+            
             if (err) {
                 console.log(err);
                 return res.render('register', { account: account });
@@ -40,6 +42,7 @@ router.post('/register', function (req, res) {
             passport.authenticate('local')(req, res, function () {
                 //console.log("---------- Called twice?");
                 //console.log("This is user: ", req.user);
+                console.log("jsonwebtoken: ", req.user["token"])
                 var token = req.user["token"];
                 var email = req.body["email"];
                 host = req.get('host');
