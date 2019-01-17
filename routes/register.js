@@ -6,7 +6,7 @@ var mongoose = require('mongoose');
 const nodemailer = require('nodemailer');
 
 
-var rand, mailOptions, host;
+var emailVerificationToken, emailAddress, mailOptions, host;
 
 
 // Create a SMTP transporter object
@@ -26,7 +26,6 @@ router.get('/register', function (req, res) {
 
 router.post('/register', function (req, res) {
     //rand = Math.floor((Math.random() * 100 + 54));
-    
     Account.register(new Account({
         _id: new mongoose.Types.ObjectId(),
         email: req.body.email,
@@ -43,11 +42,11 @@ router.post('/register', function (req, res) {
                 //console.log("---------- Called twice?");
                 //console.log("This is user: ", req.user);
                 console.log("jsonwebtoken: ", req.user["token"])
-                var token = req.user["token"];
-                var email = req.body["email"];
+                emailVerificationToken = req.user["token"];
+                emailAddress = req.body["email"];
                 host = req.get('host');
                 //write email
-                mailOptions = writeEmail(email, host, token);
+                mailOptions = writeEmail(emailAddress, host, emailVerificationToken);
                 //send Email 
                 sendEmail(mailOptions);
                 res.redirect('/');
@@ -56,11 +55,11 @@ router.post('/register', function (req, res) {
 });
 
 router.get('/verify', function (req, res) {
-    console.log(`${req.protocol}://${req.get('host')}`);
+    //console.log(`${req.protocol}://${req.get('host')}`);
     if (`${req.protocol}://${req.get('host')}` == `http://${host}`) {
-        console.log("Domain is matched. Information is from authentic email");
-        if (req.query.id == rand) {
-            console.log("email is verified");
+        //console.log("Domain is matched. Information is from authentic email");
+        if (req.query.id == emailVerificationToken) {
+            //console.log("email is verified");
             res.end(`<h1>Email ${mailOptions["to"]} has been successfully verified`);
         }
         else {
@@ -73,12 +72,12 @@ router.get('/verify', function (req, res) {
 });
 
 //Function that writes the email
-function writeEmail(emailAddress, host, token) {
-    console.log("Reach here at least one? From writeEmail ---------------------");
+function writeEmail(email, host, token) {
+    //console.log("Reach here at least one? From writeEmail ---------------------");
     var link = `http://${host}/verify?id=${token}`;
     return mailOptions = {
         from: '"Fred Foo 👻" <f4qyvj4zqnykxug5@ethereal.email>', // sender address
-        to: emailAddress, // list of receivers
+        to: email, // list of receivers
         subject: "Hello ✔", // Subject line
         text: "Hello world?", // plain text body
         html: "Hello,<br> Please Click on the link to verify your email.<br><a href=" + link + ">Click here to verify</a>"
