@@ -92,10 +92,10 @@ router.get('/user/:username', function (req, res) {
     if (req.user) {
         //Display url based on username
         req.params.username = req.user['username'];
-        MongoClient.connect(url,{ useNewUrlParser: true }, function (err, db,) {
+        MongoClient.connect(url,{ useMongoClient: true }, { useNewUrlParser: true }, function (err, db,) {
             if (err) throw err;
             var dbo = db.db("passport_local_mongoose_express4");
-            dbo.collection("countries").find({}).toArray(function (err,
+            dbo.collection("countries").find({owner: req.user["_id"]}).toArray(function (err,
                 result) {
                 if (err) throw err;
                 //console.log(result);
