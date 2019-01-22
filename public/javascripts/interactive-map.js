@@ -35,8 +35,7 @@ var activeState = polygonTemplate.states.create("active");
 activeState.properties.fill = worldMap.colors.getIndex(3).brighten(-0.5);
 
 
-//Fetch data from mongodb
-
+//Fetch data from mongodbs
 worldSeries.events.once("ready", checkBoxes);
 function checkBoxes() {
   for (var i = 0; i < visitedCountries.length; i++) {
