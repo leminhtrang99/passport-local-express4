@@ -83,7 +83,7 @@ for (var i = 0; i < northAmerica.length; i++) {
 for (var i = 0; i < southAmerica.length; i++) {
     southAmericaMap.set(southAmerica[i], southAmericaCodes[i]);
 }
-for (var i = 0; i < southAmerica.length; i++) {
+for (var i = 0; i < europe.length; i++) {
     europeMap.set(europe[i], europeCodes[i]);
 }
 
