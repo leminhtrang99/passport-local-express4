@@ -11,59 +11,66 @@ block content
 
     div(class='container')
       ul(class="nav nav-tabs")
-        li(class="active")
-          a(data-toggle='tab', data-anchor="northAmerica", href='#northAmerica') North America
-        li
-          a(data-toggle='tab', data-anchor="southAmerica", href='#southAmerica') South America
-        li
-          a(data-toggle='tab', data-anchor="europe", href='#europe') Europe
-        li
-          a(data-toggle='tab', data-anchor="africa", href='#africa') Africa
-        li
-          a(data-toggle='tab', data-anchor="asia", href='#asia') Asia
-        li
-          a(data-toggle='tab', data-anchor="oceania", href='#oceania') Oceania
+        li(class="nav-item")
+          a(class= "nav-link active", data-toggle='tab', data-anchor="northAmerica", href='#northAmerica') North America
+        li(class="nav-item")
+          a(class= "nav-link", data-toggle='tab', data-anchor="southAmerica", href='#southAmerica') South America
+        li(class="nav-item")
+          a(class= "nav-link", data-toggle='tab', data-anchor="europe", href='#europe') Europe
+        li(class="nav-item")
+          a(class= "nav-link", data-toggle='tab', data-anchor="africa", href='#africa') Africa
+        li(class="nav-item")
+          a(class= "nav-link", data-toggle='tab', data-anchor="asia", href='#asia') Asia
+        li(class="nav-item")
+          a(class= "nav-link", data-toggle='tab', data-anchor="oceania", href='#oceania') Oceania
 
       form(role='form', action="/submit-country", method="post", style='max-width: 300px;')
         .form-group
           div(id="map-list" class='tab-content')
-            div(id="northAmerica", class='tab-pane fade in active')
+            div(id="northAmerica", class='tab-pane fade show active')
               each country in northAmericanCountries
-                p
+                div
+                  p
                   input(type='checkbox', value= NACodes.get(country), name="countries", id=NACodes.get(country))
                   = country
 
             div(id="southAmerica", class='tab-pane fade')
               each country in southAmericanCountries
-                p
+                div
+                  p
                   input(type='checkbox', value= SACodes.get(country), name="countries", id=SACodes.get(country))
                   = country
 
             div(id="europe", class='tab-pane fade')
               each country in europeanCountries
-                p
+                div
+                  p
                   input(type='checkbox', value= eurCodes.get(country), name="countries", id=eurCodes.get(country))
                   = country
 
             div(id="africa", class='tab-pane fade')
               each country in africanCountries
-                p
+                div
+                  p
                   input(type='checkbox', value= afrCodes.get(country), name="countries", id=afrCodes.get(country))
                   = country
 
             div(id="asia", class='tab-pane fade')
               each country in asianCountries
-                p
+                div
+                  p
                   input(type='checkbox', value= asCodes.get(country), name="countries", id=asCodes.get(country))
                   = country
 
             div(id='oceania', class='tab-pane fade')
               each country in oceanicCountries
-                p
+                div
+                  p
                   input(type='checkbox', value= oceCodes.get(country), name="countries", id=oceCodes.get(country))
                   = country
 
-        button.btn.btn-default(type='submit') Submit
+        button.btn.btn-primary(type='submit') Submit
 
-      a(href="/logout") Logout
+      button.btn.btn-secondary
+        a(href="/logout") Logout
 
