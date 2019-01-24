@@ -53,15 +53,18 @@ function checkBoxes() {
 polygonTemplate.events.on("hit", function (ev) {
   var countryCode = ev.target.dataItem.dataContext.id;
   ev.target.isActive = !ev.target.isActive;
-  // if (ev.target.isActive == true) {
-  //   checkedCountries.push(countryCode);
-  //   checkedCountries.sort();
-  // } else {
-  //   checkedCountries.splice(checkedCountries.indexOf(countryCode), 1);
-  //   checkedCountries.sort();
-  // }
   var checkbox = jQuery("input[value=" + countryCode + "]");
   var anchor = jQuery(checkbox).parents(".tab-pane").attr("id");
+  // if (ev.target.isActive == true) {
+  //   //checkedCountries.push(countryCode);
+  //   //checkedCountries.sort();
+  //   checkbox.prop("checked", true);
+  // } else {
+  //   //checkedCountries.splice(checkedCountries.indexOf(countryCode), 1);
+  //   //checkedCountries.sort();
+  //   checkbox.prop("checked", false);
+  // }
+  var checkbox = jQuery("input[value=" + countryCode + "]");
   checkbox.prop("checked", !checkbox.prop("checked"));
   jQuery(".container .nav-tabs [data-anchor=" + anchor + "]").tab("show");
 });
