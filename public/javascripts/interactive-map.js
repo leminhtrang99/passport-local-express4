@@ -6,7 +6,7 @@ am4core.useTheme(am4themes_animated);
 // Themes end
 
 // Create map instance
-var worldMap = am4core.create("mapdiv", am4maps.MapChart);
+var worldMap = am4core.create("mapDiv", am4maps.MapChart);
 worldMap.getAreasFromMap = true;
 
 

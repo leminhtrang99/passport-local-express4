@@ -4,73 +4,87 @@ block content
   script(type='text/javascript').
     var visitedCountries = !{JSON.stringify(visitedCountries)}
   if (user)
-    p You are currently logged in as #{user.username}
-    p Countries you've been to
-    
-    div(id='mapdiv')
+    nav(class="navbar navbar-expand-lg navbar-dark bg-dark")
+        a(class="navbar-brand", href="#") Mappit?
+        button(class="navbar-toggler" type="button" data-toggle="collapse" data-target="#globalNavbar" aria-controls="globalNavbar" aria-expanded="false" aria-label="Toggle navigation")
+          span(class="navbar-toggler-icon")
+        div(class="collapse navbar-collapse" id="globalNavbar")
+          ul(class="navbar-nav ml-auto navbar-right")
+            li(class="nav-item")
+              a(class="nav-link" href="/") Home 
+            li(class="nav-item active")
+              a(class="nav-link" href="/login") Login
+                span(class="sr-only") current
+            li(class="nav-item")
+              a(class="nav-link" href="/register") Register
+    .container          
+      p You are currently logged in as #{user.username}
+      p Countries you've been to
+      
+      div(id='mapDiv')
 
-    div(class='container')
-      ul(class="nav nav-tabs")
-        li(class="nav-item")
-          a(class= "nav-link active", data-toggle='tab', data-anchor="northAmerica", href='#northAmerica') North America
-        li(class="nav-item")
-          a(class= "nav-link", data-toggle='tab', data-anchor="southAmerica", href='#southAmerica') South America
-        li(class="nav-item")
-          a(class= "nav-link", data-toggle='tab', data-anchor="europe", href='#europe') Europe
-        li(class="nav-item")
-          a(class= "nav-link", data-toggle='tab', data-anchor="africa", href='#africa') Africa
-        li(class="nav-item")
-          a(class= "nav-link", data-toggle='tab', data-anchor="asia", href='#asia') Asia
-        li(class="nav-item")
-          a(class= "nav-link", data-toggle='tab', data-anchor="oceania", href='#oceania') Oceania
+      div(class='container')
+        ul(class="nav nav-tabs")
+          li(class="nav-item")
+            a(class= "nav-link active", data-toggle='tab', data-anchor="northAmerica", href='#northAmerica') North America
+          li(class="nav-item")
+            a(class= "nav-link", data-toggle='tab', data-anchor="southAmerica", href='#southAmerica') South America
+          li(class="nav-item")
+            a(class= "nav-link", data-toggle='tab', data-anchor="europe", href='#europe') Europe
+          li(class="nav-item")
+            a(class= "nav-link", data-toggle='tab', data-anchor="africa", href='#africa') Africa
+          li(class="nav-item")
+            a(class= "nav-link", data-toggle='tab', data-anchor="asia", href='#asia') Asia
+          li(class="nav-item")
+            a(class= "nav-link", data-toggle='tab', data-anchor="oceania", href='#oceania') Oceania
 
-      form(role='form', action="/submit-country", method="post", style='max-width: 300px;')
-        .form-group
-          div(id="map-list" class='tab-content')
-            div(id="northAmerica", class='tab-pane fade show active')
-              each country in northAmericanCountries
-                div
-                  p
-                  input(type='checkbox', value= NACodes.get(country), name="countries", id=NACodes.get(country))
-                  = country
+        form(role='form', action="/submit-country", method="post", style='max-width: 300px;')
+          .form-group
+            div(id="map-list" class='tab-content')
+              div(id="northAmerica", class='tab-pane fade show active')
+                each country in northAmericanCountries
+                  div
+                    p
+                    input(type='checkbox', value= NACodes.get(country), name="countries", id=NACodes.get(country))
+                    = country
 
-            div(id="southAmerica", class='tab-pane fade')
-              each country in southAmericanCountries
-                div
-                  p
-                  input(type='checkbox', value= SACodes.get(country), name="countries", id=SACodes.get(country))
-                  = country
+              div(id="southAmerica", class='tab-pane fade')
+                each country in southAmericanCountries
+                  div
+                    p
+                    input(type='checkbox', value= SACodes.get(country), name="countries", id=SACodes.get(country))
+                    = country
 
-            div(id="europe", class='tab-pane fade')
-              each country in europeanCountries
-                div
-                  p
-                  input(type='checkbox', value= eurCodes.get(country), name="countries", id=eurCodes.get(country))
-                  = country
+              div(id="europe", class='tab-pane fade')
+                each country in europeanCountries
+                  div
+                    p
+                    input(type='checkbox', value= eurCodes.get(country), name="countries", id=eurCodes.get(country))
+                    = country
 
-            div(id="africa", class='tab-pane fade')
-              each country in africanCountries
-                div
-                  p
-                  input(type='checkbox', value= afrCodes.get(country), name="countries", id=afrCodes.get(country))
-                  = country
+              div(id="africa", class='tab-pane fade')
+                each country in africanCountries
+                  div
+                    p
+                    input(type='checkbox', value= afrCodes.get(country), name="countries", id=afrCodes.get(country))
+                    = country
 
-            div(id="asia", class='tab-pane fade')
-              each country in asianCountries
-                div
-                  p
-                  input(type='checkbox', value= asCodes.get(country), name="countries", id=asCodes.get(country))
-                  = country
+              div(id="asia", class='tab-pane fade')
+                each country in asianCountries
+                  div
+                    p
+                    input(type='checkbox', value= asCodes.get(country), name="countries", id=asCodes.get(country))
+                    = country
 
-            div(id='oceania', class='tab-pane fade')
-              each country in oceanicCountries
-                div
-                  p
-                  input(type='checkbox', value= oceCodes.get(country), name="countries", id=oceCodes.get(country))
-                  = country
+              div(id='oceania', class='tab-pane fade')
+                each country in oceanicCountries
+                  div
+                    p
+                    input(type='checkbox', value= oceCodes.get(country), name="countries", id=oceCodes.get(country))
+                    = country
 
-        button.btn.btn-primary(type='submit') Submit
+          button.btn.btn-primary(type='submit') Submit
 
-      button.btn.btn-secondary
-        a(href="/logout") Logout
+        button.btn.btn-secondary
+          a(href="/logout") Logout
 

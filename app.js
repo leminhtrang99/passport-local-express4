@@ -17,6 +17,7 @@ var login = require('./routes/login');
 var submitCountry = require('./routes/submit-country');
 var register = require('./routes/register');
 var emailVerification = require('./routes/email-verification')
+var flash = require('connect-flash');
 var app = express();
 
 // view engine setup
@@ -40,7 +41,7 @@ app.use(passport.initialize());
 app.use(passport.session());
 app.use(express.static(path.join(__dirname, 'public')));
 
-
+app.use(flash());
 app.use('/', index);
 app.use('/', users);
 app.use('/', user);
@@ -48,6 +49,7 @@ app.use('/', login);
 app.use('/', submitCountry);
 app.use('/', register);
 app.use('/', emailVerification);
+
 
 // passport config
 var Account = require('./models/account');

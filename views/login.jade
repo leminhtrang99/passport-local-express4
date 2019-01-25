@@ -1,16 +1,32 @@
 extends layout
 
 block content
-  .container
-    h1 Login Page
+  nav(class="navbar navbar-expand-lg navbar-dark bg-dark")
+        a(class="navbar-brand", href="#") Mappit?
+        button(class="navbar-toggler" type="button" data-toggle="collapse" data-target="#globalNavbar" aria-controls="globalNavbar" aria-expanded="false" aria-label="Toggle navigation")
+          span(class="navbar-toggler-icon")
+        div(class="collapse navbar-collapse" id="globalNavbar")
+          ul(class="navbar-nav ml-auto navbar-right")
+            li(class="nav-item")
+              a(class="nav-link" href="/") Home 
+            li(class="nav-item active")
+              a(class="nav-link" href="/login") Login
+                span(class="sr-only") current
+            li(class="nav-item")
+              a(class="nav-link" href="/register") Register
+
+  .container(id="loginForm")
+    h1 Log in to Mappit
     p.lead Say something worthwhile here.
     br
-    form(role='form', action="/login",method="post", style='max-width: 300px;')
-      .form-group
-        input.form-control(type='text', name="username", placeholder='Enter Username', autocomplete="off")
-      .form-group
-        input.form-control(type='password', name="password", placeholder='Password')
-      button.btn.btn-primary(type='submit') Submit
-      &nbsp;
-      a(href='/')
-        button.btn.btn-secondary(type="button") Cancel
+    div
+      p(class="flash error") Sorry, we didn’t recognize that email/password combination. Please try again.
+      form(role='form', action="/login" method="post" style='max-width: 300px;')
+        .form-group
+          input.form-control(type='text', name="username", placeholder='Enter Username', autocomplete="off")
+        .form-group
+          input.form-control(type='password', name="password", placeholder='Password')
+        button.btn.btn-primary(type='submit') Submit
+        &nbsp;
+        a(href='/')
+          button.btn.btn-secondary(type="button") Cancel
