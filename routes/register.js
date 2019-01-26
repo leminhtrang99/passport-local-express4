@@ -72,7 +72,8 @@ router.get('/verify', function (req, res) {
                     db.close();
                     //console.log("change of active status: ", account["isActive"])
                     //console.log(visitedCountries);
-                    res.end(`<h1>Email ${mailOptions["to"]} has been successfully verified`);
+                    res.end(`<h1>Email ${mailOptions["to"]} has been successfully verified. Click <a href="login">here<a> to login.</h1>`);
+                    //res.redirect("/login")
             });
         }
         else {

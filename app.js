@@ -9,6 +9,7 @@ var mongoose = require('mongoose');
 var passport = require('passport');
 var LocalStrategy = require('passport-local').Strategy;
 const nodemailer = require("nodemailer");
+var flash = require('connect-flash');
 
 var index = require('./routes/index');
 var users = require('./routes/users');
@@ -17,7 +18,7 @@ var login = require('./routes/login');
 var submitCountry = require('./routes/submit-country');
 var register = require('./routes/register');
 var emailVerification = require('./routes/email-verification')
-var flash = require('connect-flash');
+
 var app = express();
 
 // view engine setup
@@ -40,8 +41,8 @@ app.use(require('express-session')({
 app.use(passport.initialize());
 app.use(passport.session());
 app.use(express.static(path.join(__dirname, 'public')));
-
 app.use(flash());
+
 app.use('/', index);
 app.use('/', users);
 app.use('/', user);

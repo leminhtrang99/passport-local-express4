@@ -18,16 +18,20 @@ block content
 
   .container(id="loginForm")
     h1 Log in to Mappit
-    p.lead Say something worthwhile here.
+    p.lead 
     br
     div
-      p(class="flash error") Sorry, we didn’t recognize that email/password combination. Please try again.
-      form(role='form', action="/login" method="post" style='max-width: 300px;')
-        .form-group
-          input.form-control(type='text', name="username", placeholder='Enter Username', autocomplete="off")
-        .form-group
-          input.form-control(type='password', name="password", placeholder='Password')
+      form.needs-validation(novalidate role='form' action="/login" method="post" style='max-width: 300px;')
+        div.form-group
+          input.form-control(type='text', name="username", autocomplete="off" ng-model="userName" required)
+          label(for="username" class="animated-label") Username
+          div.valid-feedback Looks good!
+          div.invalid-feedback Please fill in username
+        div.form-group
+          input.form-control(type='password', name="password" required)
+          label(for="password" class="animated-label") Password
+          div.invalid-feedback Please fill in password
         button.btn.btn-primary(type='submit') Submit
         &nbsp;
         a(href='/')
-          button.btn.btn-secondary(type="button") Cancel
+        button.btn.btn-secondary(type="button") Cancel

@@ -5,7 +5,7 @@ var router = express.Router();
 
 router.get('/', function (req, res) {
     if (req.user) {
-        if (req.user["isActive"] == false) {res.render('index', {user: req.user});}
+        if (req.user["isActive"] === false) {res.render('index', {user: req.user});}
         else {
             var username = req.user['username'];
             res.redirect(`/user/${username}`);
