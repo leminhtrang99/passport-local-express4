@@ -11,16 +11,7 @@ body {
   font-family: Arial;
 }
 
-#loginForm{
-  padding: 50px;
-  text-align: center;
-  align-content: center;
-  
-}
 
-label{
-  align-self: unset
-}
 
 #mapDiv {
   width: 100%;

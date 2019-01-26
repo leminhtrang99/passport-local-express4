@@ -4,7 +4,8 @@ var Account = require('../models/account');
 var router = express.Router();
 var mongoose = require('mongoose');
 const nodemailer = require('nodemailer');
-
+var MongoClient = require('mongodb').MongoClient;
+var url = "mongodb://localhost:27017/";
 
 var emailVerificationToken, emailAddress, mailOptions, host;
 
@@ -24,13 +25,13 @@ router.get('/register', function (req, res) {
     res.render('register', {});
 });
 
-router.post('/register', function (req, res) {
+router.post('/register', function (req, res, next) {
     //rand = Math.floor((Math.random() * 100 + 54));
     Account.register(new Account({
         _id: new mongoose.Types.ObjectId(),
         email: req.body.email,
         username: req.body.username,
-        active: false,
+        isActive: false,
         token: Account.generateJWT(),
     }), req.body.password, function (err, account) {
             
@@ -38,17 +39,17 @@ router.post('/register', function (req, res) {
                 console.log(err);
                 return res.render('register', { account: account });
             }
-            passport.authenticate('local')(req, res, function () {
-                //console.log("---------- Called twice?");
-                //console.log("This is user: ", req.user);
-                console.log("jsonwebtoken: ", req.user["token"])
+            passport.authenticate('local') (req, res, function () {
                 emailVerificationToken = req.user["token"];
                 emailAddress = req.body["email"];
                 host = req.get('host');
-                //write email
+
+                //Write email
                 mailOptions = writeEmail(emailAddress, host, emailVerificationToken);
-                //send Email 
+         
+                //Send Email 
                 sendEmail(mailOptions);
+
                 res.redirect('/');
             });
     });
@@ -60,10 +61,22 @@ router.get('/verify', function (req, res) {
         //console.log("Domain is matched. Information is from authentic email");
         if (req.query.id == emailVerificationToken) {
             //console.log("email is verified");
-            res.end(`<h1>Email ${mailOptions["to"]} has been successfully verified`);
+            MongoClient.connect(url,{ useNewUrlParser: true }, function (err, db,) {
+                if (err) {throw err;}
+                var dbo = db.db("passport_local_mongoose_express4");
+                dbo.collection("accounts").findOneAndUpdate({email: mailOptions["to"]}, {$set:{isActive: true}}, {new: true}, (err, doc) => {
+                    if(err) console.log(err);
+                });
+                    //console.log(result);
+                    //account['isActive'] = true;
+                    db.close();
+                    //console.log("change of active status: ", account["isActive"])
+                    //console.log(visitedCountries);
+                    res.end(`<h1>Email ${mailOptions["to"]} has been successfully verified`);
+            });
         }
         else {
-            console.log("email is not verified");
+            console.log("Email is not verified");
             res.end("<h1>Bad Request</h1>");
         }
     } else {

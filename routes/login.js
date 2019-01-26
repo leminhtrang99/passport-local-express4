@@ -13,6 +13,8 @@ router.post('/login', passport.authenticate('local', {
     failureFlash: 'Invalid username and/or password.',
 }),
 function(req, res) {
+    if (req.user["isActive"]==false) res.redirect('/');
+    console.log(req.user["isActive"]);
     var username = req.user['username'];
     res.redirect(`/user/${username}`);
     //console.log("logged in successfully");

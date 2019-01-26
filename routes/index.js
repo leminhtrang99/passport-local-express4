@@ -5,9 +5,14 @@ var router = express.Router();
 
 router.get('/', function (req, res) {
     if (req.user) {
-        var username = req.user['username'];
-        res.redirect(`/user/${username}`);}
+        if (req.user["isActive"] == false) {res.render('index', {user: req.user});}
+        else {
+            var username = req.user['username'];
+            res.redirect(`/user/${username}`);
+        }
+    }
     else res.render('index', { user : req.user });
+
 });
 
 
