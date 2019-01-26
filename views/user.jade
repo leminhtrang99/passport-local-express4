@@ -12,11 +12,13 @@ block content
           ul(class="navbar-nav ml-auto navbar-right")
             li(class="nav-item")
               a(class="nav-link" href="/") Home 
-            li(class="nav-item active")
-              a(class="nav-link" href="/login") Login
-                span(class="sr-only") current
-            li(class="nav-item")
-              a(class="nav-link" href="/register") Register
+            li(class="nav-item dropdown")
+              a(class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false") Account
+              //span(class="sr-only") current
+              div(class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink")
+                a.dropdown-item(href="#") Action
+                a.dropdown-item(href="/logout") Log out
+            
     .container          
       p You are currently logged in as #{user.username}
       p Countries you've been to
@@ -84,7 +86,3 @@ block content
                     = country
 
           button.btn.btn-primary(type='submit') Submit
-
-        button.btn.btn-secondary
-          a(href="/logout") Logout
-
