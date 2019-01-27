@@ -24,13 +24,13 @@ block content
     div
       form.needs-validation(novalidate role='form' action="/login" method="post" style='max-width: 300px;')
         div.form-group
-          input.form-control(type='text', name="username", autocomplete="off" ng-model="userName" required)
-          label(for="username" class="animated-label") Username
+          input.form-control(type='text', name="username", autocomplete="off" placeholder="michael" required)
+          label(for="username") Username
           div.valid-feedback Looks good!
           div.invalid-feedback Please fill in username
         div.form-group
-          input.form-control(type='password', name="password" required)
-          label(for="password" class="animated-label") Password
+          input.form-control(type='password', name="password" placeholder="*******" required)
+          label(for="password") Password
           div.invalid-feedback Please fill in password
         button.btn.btn-primary(type='submit') Submit
         &nbsp;
