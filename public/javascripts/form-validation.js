@@ -15,3 +15,10 @@
       });
     }, false);
   })();
+
+window.onload=function() {
+    if(message.length!=0) {
+      document.getElementById("loginFormErrorMessage").innerHTML = message[0].toString();
+    }
+}
+
