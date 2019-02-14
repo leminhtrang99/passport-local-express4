@@ -100,3 +100,8 @@ input.form-control:focus + label {
   cursor: pointer;
 }
 
+div.tab-content {
+  overflow-y: scroll;
+  height:500px;
+  width:500px;
+}
